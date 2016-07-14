@@ -6,7 +6,7 @@ spec:
   containers:
   - name: docker
     image: docker:1.10.0
-    command: ["docker", "build", "-t", "test/test", "/home/demo/developer-tutorial/example-1-cowsay"]
+    command: ["docker", "build", "-t", "pod/cowsay:test", "/home/demo/ndslabs-docker/cowsay"]
     securityContext: 
       privileged: true
     volumeMounts: 
