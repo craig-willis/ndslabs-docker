@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: docker-build-push
+spec:
+  template:
+    metadata:
+      name: docker-build-push
+    spec:
+      containers:
+      - name: docker
+        image: docker:1.10.0
+        command: ["docker", "build", "-t", "test/cowsay:tag", "/home/demo/developer-tutorial/example-1-cowsay"]
+        securityContext: 
+          privileged: true
+        volumeMounts: 
+        - name: dockersock 
+          mountPath: /var/run/docker.sock
+        - name: home 
+          mountPath: /home/demo
+      restartPolicy: Never
+      volumes:
+      - name: dockersock
+        hostPath:
+          path: /var/run/docker.sock
+      - name: home
+        hostPath:
+          path: /tmp/volumes/demo
